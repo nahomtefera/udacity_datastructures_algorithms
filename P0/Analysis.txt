@@ -1,0 +1,58 @@
+# Task 0 
+    - Worst Case Complexity: O(1)
+    - Algorithm: 
+        - Assign a variable O(1)
+        - Print strings O(1)
+
+# Task 1
+    - Worst Case Complexity: O(n)
+    - Algorithm:
+        - Assign Variables O(n)
+        - 2x Loop through calls O(n)
+            - Assign variables O(n)
+            - 2x Search set O(1)
+                - Add to set O1()
+        - Print O(1)
+
+
+# Task 2
+    - Worst Case Complexity: O(n)
+    - Algorithm:
+        - Initialize variable O(1)
+        - Loop operation O(n)
+            - Initialize variables O(1)
+            - Comparison O(1)
+                - 4x Search dict O(1)
+                    - Assign variable O(1)
+        - Loop Operation O(n)
+            - Assign variable O(1)
+            - Comparison O(1)
+                - 2x Assign variable O(1)
+
+# Task 3
+    - Worst Case Complexity: O(n log n)
+    - Algorithm:
+        - 3x Assign variables O(1)
+        - Loop through calls O(n)
+            - Comparison O(1)
+                - 3x Comparison O(1)
+                    - Assign variables / Append to list O(1)
+        - List operations and Sort O(n log n)
+        - Assign variable O(1)
+        - Loop through list O (n)
+            - Comparison O(1)
+                - Addition O(1)
+        - 2x Prints O(1)
+        - Loop O(n)
+
+# TASK 4 COMPLEXY ANALYSIS
+    - Worst Case Complexity: O(n log n)
+    - Algorithm:
+        - 2x Assign Variables O(1)
+        - 3x Loop list
+            - Search set O(n)
+                - Assign / add O(1)
+    - Sort list O(n log n)
+    - Print O(1)
+    - Loop O(n)
+        - Print O(1)

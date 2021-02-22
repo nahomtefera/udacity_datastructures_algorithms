@@ -40,7 +40,7 @@ The list of numbers should be print out one per line in lexicographic order with
 # CODE
 
 outbandCalls = {}
-possibleTeles = []
+possibleTeles = set()
 
 for call in calls :
     if call[1] not in outbandCalls :
@@ -48,17 +48,18 @@ for call in calls :
 
 for call in calls :
     if call[0] not in outbandCalls :
-        possibleTeles.append(call[0])
+        possibleTeles.add(call[0])
 
 for text in texts :
     if text[0] in possibleTeles :
-        possibleTeles.remove(text[0])
+        possibleTeles.discard(text[0])
     if text[1] in possibleTeles :
-        possibleTeles.remove(text[1])
+        possibleTeles.discard(text[1])
 
-possibleTeles.sort() 
+# Sort result
+sortedTeles = sorted(list(possibleTeles))
 
 print("These numbers could be telemarketers: ")
 
-for phoneNumber in possibleTeles :
+for phoneNumber in sortedTeles :
     print(phoneNumber)

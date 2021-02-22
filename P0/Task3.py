@@ -68,7 +68,8 @@ for call in calls :
 
 # SORT ALL OUTBOUND CALLS
 outBandCalls = outBoundFixedLines + outBoundMobiles + outBoundTeles
-outBandCalls.sort(key=int)
+numOfCalls = len(outBandCalls)
+sortedCalls = sorted(set(outBandCalls))
 
 
 # PART B CODE
@@ -80,9 +81,9 @@ for call in outBandCalls :
 
 # PART A PRINT
 print("The numbers called by people in Bangalore have codes: ")
-for call in outBandCalls :
+for call in sortedCalls :
   print(call)
 
 # PART B PRINT
-percCallsBnglr = (100 * outbandBnglr) / float(len(outBandCalls))
+percCallsBnglr = (100 * outbandBnglr) / float(numOfCalls)
 print(str(round(percCallsBnglr, 2)) + " percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
