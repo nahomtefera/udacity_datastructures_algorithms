@@ -61,8 +61,8 @@ for call in calls :
     if call[1][0:2] == "(0" :
       indexEndPrefix = call[1].find(")")
       outBoundFixedLines.append(call[1][1:indexEndPrefix])
-    elif " " in call[1] :
-      outBoundMobiles.append(call[1][0:5])
+    elif " " in call[1] and (call[1][0] == 7 or 8 or 9):
+      outBoundMobiles.append(call[1][0:4])
     elif call[1][0:3] == "140" :
       outBoundTeles.append(call[1])  
 

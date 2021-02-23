@@ -1,17 +1,14 @@
 # Task 0 
     - Worst Case Complexity: O(1)
     - Algorithm: 
-        - Assign a variable O(1)
         - Print strings O(1)
 
 # Task 1
     - Worst Case Complexity: O(n)
     - Algorithm:
-        - Assign Variables O(n)
+        - Assign Variables O(1)
         - 2x Loop through calls O(n)
-            - Assign variables O(n)
-            - 2x Search set O(1)
-                - Add to set O1()
+            - 2x Add item to set O(1)
         - Print O(1)
 
 
@@ -48,10 +45,9 @@
 # TASK 4 COMPLEXY ANALYSIS
     - Worst Case Complexity: O(n log n)
     - Algorithm:
-        - 2x Assign Variables O(1)
+        - Assign Variables O(1)
         - 3x Loop list
-            - Search set O(n)
-                - Assign / add O(1)
+            - Assign / add O(1)
     - Sort list O(n log n)
     - Print O(1)
     - Loop O(n)

@@ -1,5 +1,3 @@
-from datetime import datetime
-
 """
 Read file into texts and calls.
 It's ok if you don't understand how to read files
@@ -34,28 +32,22 @@ September 2016.".
 timeSpentByNumber = {}
 
 for call in calls :
-    # Format time
-    date = datetime.strptime(call[2], "%d-%m-%Y %H:%M:%S")
-    month = date.month
-    year = date.year
-    hour = date.hour
     # Initialize call variables
     outbandNumber = call[0]
     inBoundNumber = call[1]
     timeOnCall = int(call[3])
 
-    if year == 2016 and month == 9 :
-        # Outband calls
-        if outbandNumber in timeSpentByNumber :
-            timeSpentByNumber[outbandNumber] += int(timeOnCall)
-        elif outbandNumber not in timeSpentByNumber :
-            timeSpentByNumber[outbandNumber] = int(timeOnCall)
+    # Outband calls
+    if outbandNumber in timeSpentByNumber :
+        timeSpentByNumber[outbandNumber] += int(timeOnCall)
+    else:
+        timeSpentByNumber[outbandNumber] = int(timeOnCall)
 
-        # Inboundd calls
-        if inBoundNumber in timeSpentByNumber :
-            timeSpentByNumber[inBoundNumber] += int(timeOnCall)
-        elif inBoundNumber not in timeSpentByNumber :
-            timeSpentByNumber[inBoundNumber] = int(timeOnCall)
+    # Inboundd calls
+    if inBoundNumber in timeSpentByNumber :
+        timeSpentByNumber[inBoundNumber] += int(timeOnCall)
+    else:
+        timeSpentByNumber[inBoundNumber] = int(timeOnCall)
 
 longestCallTime = 0
 number = None

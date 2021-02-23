@@ -26,38 +26,29 @@ The list of numbers should be print out one per line in lexicographic order with
 """
 
 # APRROACH
-    # Create dict of outbound calls and a list of possible telemarketers
+    # Create empty set of possible telemarketers
     # Loop through all calls
-        # Add outband call to list
+        # Add call[0] to list
     # Loop through calls again 
-        # check if current caller is in the outband calls list
-            # if it's not in the outbound list, add it to possible telemarketers list
+        # Discard call[1] if it's in the list (teles don receive calls)
     # Loop throug texts
-        # check if current sender, and sendee are in the possible telemarketers list
-            # if they are, remove them 
+        # remove text[0] and text[1] (teles don't do texts)
 
 
 # CODE
 
-outbandCalls = {}
 possibleTeles = set()
 
 for call in calls :
-    if call[1] not in outbandCalls :
-        outbandCalls[call[1]] = True
-
+    possibleTeles.add(call[0])
 for call in calls :
-    if call[0] not in outbandCalls :
-        possibleTeles.add(call[0])
-
+    possibleTeles.discard(call[1])
 for text in texts :
-    if text[0] in possibleTeles :
-        possibleTeles.discard(text[0])
-    if text[1] in possibleTeles :
-        possibleTeles.discard(text[1])
+    possibleTeles.discard(text[0])
+    possibleTeles.discard(text[1])
 
 # Sort result
-sortedTeles = sorted(list(possibleTeles))
+sortedTeles = sorted(possibleTeles)
 
 print("These numbers could be telemarketers: ")
 

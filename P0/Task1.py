@@ -20,24 +20,13 @@ Print a message:
 """
 
 phoneBook = set()
-diffNums = 0
 
 for call in calls :
-    inBoundNumber = call[0]
-    outBandNumber = call[1]
-
-    if inBoundNumber not in phoneBook :
-        phoneBook.add(inBoundNumber)
-    if outBandNumber not in phoneBook :
-        phoneBook.add(outBandNumber)
+    phoneBook.add(call[0])
+    phoneBook.add(call[1])
 
 for text in texts :
-    inBoundNumber = text[0]
-    outBandNumber = text[1]
-
-    if inBoundNumber not in phoneBook :
-        phoneBook.add(inBoundNumber)
-    if outBandNumber not in phoneBook :
-        phoneBook.add(outBandNumber)
+    phoneBook.add(text[0])
+    phoneBook.add(text[1])
 
 print("There are {} different telephone numbers in the records".format(len(phoneBook)))
