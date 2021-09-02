@@ -1,5 +1,28 @@
 import sys
 
+# node class
+class HuffmanNode:
+  def __init__(self, character=None, frequency=None, bit=None):
+      self.left_child = None
+      self.right_child = None
+      self.character = character
+      self.frequency = frequency
+      self.bit = bit
+  #node methods
+  def has_left_child(self):
+    return self.left_child is not None
+  def has_right_child(self):
+    return self.right_child is not None
+  def get_left_child(self):
+    return self.left_child
+  def get_right_child(self):
+    return self.right_child
+  def set_left_child(self, node):
+    self.left_child = node
+  def set_right_child(self, node):
+    self.right_child = node
+  def set_bit(self, bit):
+    self.bit = bit
 # Min Heap helper
 class MinHeap:
   def __init__(self, capacity):
@@ -63,55 +86,24 @@ class MinHeap:
     temp = self.storage[index1]
     self.storage[index1] = self.storage[index2] 
     self.storage[index2] = temp 
-# node class
-class HuffmanNode:
-  def __init__(self, character=None, frequency=None, bit=None):
-      self.left_child = None
-      self.right_child = None
-      self.character = character
-      self.frequency = frequency
-      self.bit = bit
-  #node methods
-  def has_left_child(self):
-    return self.left_child is not None
-  def has_right_child(self):
-    return self.right_child is not None
-  def get_left_child(self):
-    return self.left_child
-  def get_right_child(self):
-    return self.right_child
-  def set_left_child(self, node):
-    self.left_child = node
-  def set_right_child(self, node):
-    self.right_child = node
-  def set_bit(self, bit):
-    self.bit = bit
-
-# encoding method
-def huffman_encoding(data):
-  # create a dict to store characters and frequencies
-  charTable = dict({})
-  for char in data:
-    if char not in charTable:
-      charTable[char] = 1
-    else:
-      charTable[char] +=1
-
+# huffman tree method
+def buildHuffmanTree(charTable):
   # create a priority list using the min heap function
   # inizialize minheap with a capacity of len(charTable)
   priority_list = MinHeap(len(charTable))
 
-  # loop through our dictionary of charactere and frequencies
-  for index, key in enumerate(charTable):
+  # loop through our dictionary of characters and frequencies and insert them in the priority list
+  for char in charTable:
     # create a node that holds the character and frequency
     # insert the node to our priority list
-    node = HuffmanNode(key, charTable[key])
+    frequency = charTable[char]
+    node = HuffmanNode(char, frequency)
     priority_list.insert(node)
   
   # once our priority list is set up
-    # pop the min 2 nodes 
-    # create a new node with the sum of the frequencies
-    # set the popped nodes as left_child < right_child of the new nodee
+  # pop the min 2 nodes 
+  # create a new node with the sum of the frequencies
+  # set the popped nodes as left_child < right_child of the new nodee
   while priority_list.size > 1:
     # pop 2 min nodes
     node1 = priority_list.remove_min()
@@ -132,23 +124,9 @@ def huffman_encoding(data):
     # push new node to priority list
     priority_list.insert(internalNode)
 
-  # the remaining node in the priority list will be the root of our huffman treeee
-  huffmanTreeRoot = priority_list.storage[0]
-  # to get the huffman code for each character we will traverse DFS our tree
-  code_hash = pre_order(huffmanTreeRoot)
-  encoded_data = ""
-  # loop through our dictionary of codes to encode the data
-  for index, key in enumerate(code_hash):
-    i = 0
-    while i < code_hash[key]["frequency"]:
-      encoded_data += code_hash[key]['code']
-      i += 1
-  
-  return encoded_data, huffmanTreeRoot
-
-  
-def pre_order(root):
-  visit_order = list()
+  return priority_list
+# encoder method
+def encoder(root):
   code = list()
   code_hash = dict({})
   def traverse(node):
@@ -172,31 +150,56 @@ def pre_order(root):
   traverse(root)
   return code_hash
 
+# ENCODIING METHOD
+def huffman_encoding(data):
+  # create a dict to store characters and frequencies
+  charTable = dict({})
+  for char in data:
+    if char not in charTable:
+      charTable[char] = 1
+    else:
+      charTable[char] +=1
+  # BUILD HUFFMAN TREEE
+  priority_list = buildHuffmanTree(charTable)
+  # HUFFMAN TREEE ROOT is the remaining node in the priority list
+  huffmanTreeRoot = priority_list.storage[0]
 
+  # to get the huffman code for each character we will traverse DFS our tree
+  # the encoder will return a dictionary of characters and codes
+  code_hash = encoder(huffmanTreeRoot)
+  encoded_data = ""
+  # loop through our dictionary of codes to encode the data
+  for key in code_hash:
+    i = 0
+    while i < code_hash[key]["frequency"]:
+      encoded_data += code_hash[key]['code']
+      i += 1
+  
+  return encoded_data, huffmanTreeRoot
+
+# DECODING METHOD
 def huffman_decoding(data,tree):
-  # print('decode ddata: ', data)
-  # print('decode tree: ', tree)
   decoded_msg = ''
 
   i=0
   node = tree
+  # loop coded data
+  # traverse tree following left or right child depening on current bit (0-left, 1-right)
   while i < len(data):
     bit = data[i]
-    if bit == "1":
-      node = node.right_child
     if bit == "0":
       node = node.left_child
-    
+    if bit == "1":
+      node = node.right_child
+    # if character value is not 'Internal Node' we found a character in the original data
     if node.character != 'Internal Node':
       decoded_msg += node.character
+      # once we decode a prefix, start traversing the tree from the root
       node = tree
     i += 1
   
-  print("decoded msg: ", decoded_msg)
   return decoded_msg
 
-# a_great_sentence = "The bird is the word"
-# huffman_encoding(a_great_sentence)
 
 if __name__ == "__main__":
     codes = {}
