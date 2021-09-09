@@ -23,7 +23,59 @@ class HuffmanNode:
     self.right_child = node
   def set_bit(self, bit):
     self.bit = bit
-# Min Heap helper
+
+# ENCODIING METHOD
+def huffman_encoding(data):
+  # create a dict to store characters and frequencies
+  charTable = dict({})
+  for char in data:
+    if char not in charTable:
+      charTable[char] = 1
+    else:
+      charTable[char] +=1
+  # BUILD HUFFMAN TREEE
+  priority_list = buildHuffmanTree(charTable)
+  # HUFFMAN TREEE ROOT is the remaining node in the priority list
+  huffmanTreeRoot = priority_list.storage[0]
+
+  # to get the huffman code for each character we will traverse DFS our tree
+  # the encoder will return a dictionary of characters and codes
+  code_hash = encoder(huffmanTreeRoot)
+  encoded_data = ""
+  # loop through our dictionary of codes to encode the data
+  for key in code_hash:
+    i = 0
+    while i < code_hash[key]["frequency"]:
+      encoded_data += code_hash[key]['code']
+      i += 1
+  
+  return encoded_data, huffmanTreeRoot
+
+# DECODING METHOD
+def huffman_decoding(data,tree):
+  decoded_msg = ''
+
+  i=0
+  node = tree
+  # loop coded data
+  # traverse tree following left or right child depening on current bit (0-left, 1-right)
+  while i < len(data):
+    bit = data[i]
+    if bit == "0":
+      node = node.left_child
+    if bit == "1":
+      node = node.right_child
+    # if character value is not 'Internal Node' we found a character in the original data
+    if node.character != 'Internal Node':
+      decoded_msg += node.character
+      # once we decode a prefix, start traversing the tree from the root
+      node = tree
+    i += 1
+  
+  return decoded_msg
+
+# HELPER METHODS
+# Min Heap
 class MinHeap:
   def __init__(self, capacity):
     self.storage = [0] * capacity
@@ -86,6 +138,7 @@ class MinHeap:
     temp = self.storage[index1]
     self.storage[index1] = self.storage[index2] 
     self.storage[index2] = temp 
+    
 # huffman tree method
 def buildHuffmanTree(charTable):
   # create a priority list using the min heap function
@@ -150,55 +203,6 @@ def encoder(root):
   traverse(root)
   return code_hash
 
-# ENCODIING METHOD
-def huffman_encoding(data):
-  # create a dict to store characters and frequencies
-  charTable = dict({})
-  for char in data:
-    if char not in charTable:
-      charTable[char] = 1
-    else:
-      charTable[char] +=1
-  # BUILD HUFFMAN TREEE
-  priority_list = buildHuffmanTree(charTable)
-  # HUFFMAN TREEE ROOT is the remaining node in the priority list
-  huffmanTreeRoot = priority_list.storage[0]
-
-  # to get the huffman code for each character we will traverse DFS our tree
-  # the encoder will return a dictionary of characters and codes
-  code_hash = encoder(huffmanTreeRoot)
-  encoded_data = ""
-  # loop through our dictionary of codes to encode the data
-  for key in code_hash:
-    i = 0
-    while i < code_hash[key]["frequency"]:
-      encoded_data += code_hash[key]['code']
-      i += 1
-  
-  return encoded_data, huffmanTreeRoot
-
-# DECODING METHOD
-def huffman_decoding(data,tree):
-  decoded_msg = ''
-
-  i=0
-  node = tree
-  # loop coded data
-  # traverse tree following left or right child depening on current bit (0-left, 1-right)
-  while i < len(data):
-    bit = data[i]
-    if bit == "0":
-      node = node.left_child
-    if bit == "1":
-      node = node.right_child
-    # if character value is not 'Internal Node' we found a character in the original data
-    if node.character != 'Internal Node':
-      decoded_msg += node.character
-      # once we decode a prefix, start traversing the tree from the root
-      node = tree
-    i += 1
-  
-  return decoded_msg
 
 
 if __name__ == "__main__":

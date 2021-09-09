@@ -2,7 +2,6 @@ import hashlib
 import datetime  
 
 class Block:
-
     def __init__(self, timestamp, data, previous_hash):
       self.timestamp = timestamp
       self.data = data
