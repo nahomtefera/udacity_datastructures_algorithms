@@ -5,8 +5,8 @@
 
   ### Time complexity
 
-    - Worst Case Complexity: O(n) - since we have to traverse through every directory and subdirectory the time complexity will be linear depending on the number of folders there are.
+    - Worst Case Complexity: O(n) - run time will scale linerly as the number of files and directories increases.
 
   ### Space complexity
 
-    - 
+    - Worst Case Complexity: O(n) - same as time complexity the size of our list will increase accordingly to the number of files.
