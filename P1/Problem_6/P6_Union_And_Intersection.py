@@ -45,7 +45,8 @@ def union(llist_1, llist_2):
     # Your Solution Here    
     united_ll = LinkedList()
     node = llist_1.head
-
+    
+    # loop through both lists and append each node to a new node
     while node:
       united_ll.append(node)
       node = node.next
@@ -63,6 +64,7 @@ def intersection(llist_1, llist_2):
     intersect_ll = LinkedList()
     intersect_dict = dict()
 
+    # add node values from list 1 to dicttionary
     node = llist_1.head
     while node:
       intersect_dict[str(node.value)] = 1
@@ -70,6 +72,8 @@ def intersection(llist_1, llist_2):
 
     node = llist_2.head
 
+    # check if node value iss in dictionary
+    # add it to new list if there is a match
     while node:
       if str(node.value) in intersect_dict:
         if intersect_dict[str(node.value)] == 1:
@@ -96,7 +100,9 @@ for i in element_2:
     linked_list_2.append(i)
 
 print (union(linked_list_1,linked_list_2))
+# returns new list with both ll1 and ll2
 print (intersection(linked_list_1,linked_list_2))
+# returns new list with intersection of ll1 and ll2 = 6 -> 4 -> 21 -> 
 
 # Test case 2
 
@@ -113,7 +119,9 @@ for i in element_2:
     linked_list_4.append(i)
 
 print (union(linked_list_3,linked_list_4))
+# returns new list with both ll1 and ll2
 print (intersection(linked_list_3,linked_list_4))
+# returns no intersection
 
 
 # Test case 3
@@ -131,12 +139,16 @@ for i in element_2:
     linked_list_6.append(i)
 
 print (union(linked_list_5,linked_list_6))
+# returns new list with both ll1 and ll2
 print (intersection(linked_list_5,linked_list_6))
+# returns no intersection
 
 # Test case 4
 
 linked_list_7 = LinkedList()
+# returns new list with both ll1 and ll2
 linked_list_8 = LinkedList()
+# returns no intersection
 
 element_1 = []
 element_2 = [6,7,0,9]
@@ -148,7 +160,9 @@ for i in element_2:
     linked_list_8.append(i)
 
 print (union(linked_list_7,linked_list_8))
+# returns new list with both ll1 and ll2
 print (intersection(linked_list_7,linked_list_8))
+# returns no intersection
 
 # Test case 5
 
@@ -165,4 +179,6 @@ for i in element_2:
     linked_list_10.append(i)
 
 print (union(linked_list_9,linked_list_10))
+# returns empty string
 print (intersection(linked_list_9,linked_list_10))
+# returns no intersection
