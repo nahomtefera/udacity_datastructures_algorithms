@@ -33,13 +33,18 @@ class BlockChain:
     self.size = 1
   
   def append(self, data):
+    if data is None:
+      return "Not a valid type"
     timestamp = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f%Z")
     new_block = Block(timestamp, data, self.tail.hash)
+    new_block.set_index(self.size) 
     self.tail.next = new_block
     self.tail = new_block
     self.order.append(new_block)
+    self.size += 1
   
-    
+
+## Test cases
 
 new_block_chain = BlockChain()
 
@@ -55,3 +60,28 @@ while block:
   print('hash', block.hash)
   print('prev_hash', block.previous_hash)
   block = block.next
+  ## it will print index, hash and previous_hash for every block in the chain
+
+
+
+print("========TEST CASE 2========")
+
+dripcoin = BlockChain()
+
+print(dripcoin.append(None))
+
+print("========TEST CASE 3========")
+# it will return "Not a valid type"
+dripcoin.append('give mee the moneeeyz')
+dripcoin.append('')
+
+block = dripcoin.head
+
+while block:
+  print('index', block.index)
+  print('data', block.data)
+  print('hash', block.hash)
+  print('prev_hash', block.previous_hash)
+  block = block.next
+  ## it will print index, hash and previous_hash for every block in the chain
+
