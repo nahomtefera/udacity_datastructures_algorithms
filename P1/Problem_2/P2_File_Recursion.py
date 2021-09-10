@@ -1,13 +1,18 @@
 import os
 
 def find_files(suffix, path):
+
     if(not isinstance(suffix, str) or suffix is None) or (not isinstance(path, str) or path is None):
       return "The suffix or path entered is either null or empty, enter a valid format"
 
     files_found = list()
-    return traverse_files(files_found, suffix, "./P2_subdirs")
+    return traverse_files(files_found, suffix, path)
 
 def traverse_files(list, suffix, path):
+  if not os.path.isdir(path):
+    # if the path is not a directory we exit out of the function
+    return "Path is not a directory"
+
   dirs = os.listdir(path)
   for itemName in dirs:
     if os.path.isfile(os.path.join(path, itemName)):
@@ -21,16 +26,21 @@ def traverse_files(list, suffix, path):
     elif os.path.isdir(os.path.join(path, itemName)):
       # if itenName is a dir name, traverse the directory
       traverse_files(list, suffix, os.path.join(path, itemName))
+
+  if len(list) < 1:
+    # if list is empty 
+    return "File was not found"
+    
   return list
 
 
-print(find_files(".c", "./P2_subdirs"))
+print("==>", find_files(".c", "./P2_subdirs"))
 
 # Additional test cases
 
-print(find_files(None, "./P2_subdirs/subdir2"))
+print("==>", find_files(None, "./P2_subdirs/subdir2"))
 # returns "The suffix or path entered is either null or empty, enter a valid format"
-print(find_files(".h", "./P2_subdirs"))
+print("==>", find_files(".he", "./P2_subdirs"))
 # returns ['./P2_subdirs/subdir3/subsubdir1/b.h', './P2_subdirs/subdir5/a.h', './P2_subdirs/t1.h', './P2_subdirs/subdir1/a.h']
-print(find_files("", ""))
+print("==>", find_files(".lk", "./P2_subdirs/fakeDir"))
 # return empty list
