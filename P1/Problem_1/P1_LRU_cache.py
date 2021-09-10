@@ -2,7 +2,6 @@ class LRU_Cache(object):
 
     def __init__(self, capacity):
         # Initialize class variables
-        # w
         self.hash_table = dict({})
         self.capacity = capacity
         self.num_of_entries = 0
@@ -25,6 +24,8 @@ class LRU_Cache(object):
         return -1
 
     def set(self, key, value):
+        if self.capacity < 1:
+          return "Capacity of cache should be more than 0"
         if (key is None or not isinstance(key, int)) or value is None:
           return "Can't set null values or non int"
         # Set the value if the key is not present in the cache. 
@@ -82,3 +83,22 @@ print(cache_test.set(None, 1))
 # edge case returns "Can't set null values or non int"
 print(cache_test.set("", 23))
 # edge case returns "Can't set null values or non int" 
+
+
+cache_edge_test = LRU_Cache(0)
+print(cache_edge_test.set(13, "Testing 13"))
+# returns "Capacity of cache should be more than 0"
+
+
+cache_edge_test = LRU_Cache(-1)
+print(cache_edge_test.set(3, "Testing 3"))
+# returns "Capacity of cache should be more than 0"
+
+cache_edge_test_2 = LRU_Cache(0)
+print(cache_edge_test_2.set(13, "Testing 13"))
+# returns "Capacity of cache should be more than 0"
+
+cache_edge_test_3 = LRU_Cache(10000)
+cache_edge_test_3.set(3, "Testing 3")
+print(cache_edge_test_3.get(3))
+# returns 3

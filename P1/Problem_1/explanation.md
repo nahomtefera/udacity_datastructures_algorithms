@@ -13,4 +13,4 @@
         - List operations: O(5) => O(1)
 
   ### Space complexity
-    - Both get() and set() methods have a space complexity of O(capacity) => O(1) since the loops within them run against a constant.
+    - Our cache has a space complexity of O(capacity) => O(n) as the required space will grow proportionally as we increase capacity.
