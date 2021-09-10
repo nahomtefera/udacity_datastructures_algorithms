@@ -13,4 +13,4 @@
         - List operations: O(5) => O(1)
 
   ### Space complexity
-    - Our cache has a space complexity of O(capacity) => O(n) as the required space will grow proportionally as we increase capacity.
+    - Our cache has a space complexity of O(capacity) => O(n) as the required space will grow proportional to capacity.

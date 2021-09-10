@@ -25,17 +25,18 @@ class Block:
 
 class BlockChain:
   def __init__(self):
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f%Z")
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")
     genesis_block = Block(timestamp, "Genesis Block", 0)
     self.head = genesis_block
     self.tail = genesis_block
     self.order = list([genesis_block])
     self.size = 1
   
-  def append(self, data):
+  def append(self, data, timestamp=None):
     if data is None:
       return "Not a valid type"
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f%Z")
+    if timestamp is None:
+      timestamp = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")
     new_block = Block(timestamp, data, self.tail.hash)
     new_block.set_index(self.size) 
     self.tail.next = new_block
@@ -76,6 +77,28 @@ dripcoin.append('give mee the moneeeyz')
 dripcoin.append('')
 
 block = dripcoin.head
+
+while block:
+  print('index', block.index)
+  print('data', block.data)
+  print('hash', block.hash)
+  print('prev_hash', block.previous_hash)
+  block = block.next
+  ## it will print index, hash and previous_hash for every block in the chain
+
+
+print("========TEST CASE 4========")
+## adding blocks with the same timestamp
+bchain = BlockChain()
+
+bchain.append('car payment - $300')
+print(bchain.tail.timestamp)
+bchain.append('netflix - $15')
+print(bchain.tail.timestamp)
+bchain.append('hulu - $11')
+print(bchain.tail.timestamp)
+
+block = bchain.head
 
 while block:
   print('index', block.index)
