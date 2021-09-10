@@ -84,21 +84,15 @@ print(cache_test.set(None, 1))
 print(cache_test.set("", 23))
 # edge case returns "Can't set null values or non int" 
 
-
-cache_edge_test = LRU_Cache(0)
-print(cache_edge_test.set(13, "Testing 13"))
-# returns "Capacity of cache should be more than 0"
-
-
 cache_edge_test = LRU_Cache(-1)
 print(cache_edge_test.set(3, "Testing 3"))
-# returns "Capacity of cache should be more than 0"
+# edge case returns "Capacity of cache should be more than 0"
 
 cache_edge_test_2 = LRU_Cache(0)
 print(cache_edge_test_2.set(13, "Testing 13"))
-# returns "Capacity of cache should be more than 0"
+# edge case returns "Capacity of cache should be more than 0"
 
 cache_edge_test_3 = LRU_Cache(10000)
 cache_edge_test_3.set(3, "Testing 3")
 print(cache_edge_test_3.get(3))
-# returns 3
+# edge case returns testing3
