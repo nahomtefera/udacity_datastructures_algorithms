@@ -6,4 +6,4 @@
     - I'm using 2 while loops that discard half of the values in each iteration. Making the algorith O(log(n))
 
   ### Space complexity
-    - Our space complexity is O(1) since our algorith is iterative and we are allocating a constant number of variables and the function is running in a single stack frame.
+    - Our space complexity is O(1) since our algorith is iterative and the function is only called once, it's running in a single stack frame. We are also allocating a constant number of variables making the space complexity O(1).
