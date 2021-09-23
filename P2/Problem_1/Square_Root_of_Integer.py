@@ -49,5 +49,17 @@ print("Pass" if (0 == sqrt(0)) else "Fail")
 print("Pass" if (4 == sqrt(16)) else "Fail")
 print("Pass" if (1 == sqrt(1)) else "Fail")
 print("Pass" if (5 == sqrt(27)) else "Fail")
-print("Pass" if (31 == sqrt(1000)) else "Fail")
-print('two', sqrt(256))
+
+# Additional test cases
+
+# Large input
+print(sqrt(999999999999999999999))
+# It should return 31622776601
+
+# Null imput
+print(sqrt(None))
+# It should return None
+
+# Negative number
+print(sqrt(-1))
+# It should return None
