@@ -5,7 +5,7 @@
   ### Time complexity
     - Finding pivot takes O(log(n)) time since we are using a binary search algorithm to lookup values while discarding half of the elemnts in every step.
 
-    - Once we found the pivot in the array the efficiency of finding our target is O(log(n-p)) since we will be discarding a chunk of the array depending on our pivot location and our target.
+    - Once we found the pivot in the array the efficiency of finding our target is O(log(n-p)), p being the size of the array discarded once we set our pivot as the lower or upper band. And it's a logarithmic complexity because we are performing a binary search.
 
     - Overall time complexity will be O(log(n)) + O(log(n)) => O(log(n))
 
