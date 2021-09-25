@@ -8,6 +8,6 @@
     - Once sorted we have a for loop that traverses the sorted array two stepss at a time, adding O(n/2) time to our function's time complexity.
 
   ### Space complexity
-    - The space complexity of our quicksort call will be O(log n) based on the space used in the call stack.
+    - The worst space complexity of our quicksort call will be O(n) depending on the space used in the call stack.
 
     - The while loop building the final numbers has a space complexity of O(1)
